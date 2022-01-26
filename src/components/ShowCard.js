@@ -2,13 +2,38 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ShowCard = ({ show }) => {
+
+    let showId = '';
+
+    const getId = () => {
+
+        showId = show.show.id;
+        console.log(showId);
+    }
+
+
+
     return (
 
-        <CardWrapper>
-            <ImageWrapper bcgImage={show.show.medium} />
+        <CardWrapper onClick={getId}>
+
+            <ImageWrapper>
+                {
+
+                    show.show.image ?
+                        <ImageHolder src={show.show.image.medium} /> :
+                        <ImageHolder src='https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg' />
+                }
+
+            </ImageWrapper>
             <InfoWrapper>
-                <h3 id='title'>{show.show.name}</h3>
-                <p id='premiere-year'>{show.show.premiered}</p>
+                <TitleWrapper>
+                    <h3 id='title'>{show.show.name}</h3>
+                </TitleWrapper>
+                <RelaseDateWrapper>
+                    <p id='premiere-year'>{show.show.premiered}</p>
+                </RelaseDateWrapper>
+
 
             </InfoWrapper>
 
@@ -21,34 +46,67 @@ export default ShowCard;
 
 
 const CardWrapper = styled.div`
-width:15%;
-height:300px;
+margin:20px;
+width:200px;
+
 display:flex;
+justify-content:space-between;
 flex-direction:column;
 `;
-
 const ImageWrapper = styled.div`
-width:100%;
-height:80%;
-background-image:url(${props => props.bcgImage});
-object-fit:cover;
-background-size:cover;
+
+
+`;
+
+
+const ImageHolder = styled.img`
+                        display: block;
+						width: 100%;
+						height: 350px;
+						object-fit: cover;
+						border-radius: 16px;
+						box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.15);
+						transition: 0.4s;
+                        cursor: pointer;
+
+&:hover{
+                        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.25);
+							transform: scale(1.05);
+}
 `;
 
 const InfoWrapper = styled.div`
-height:50px;
+height:100px;
 width:100%;
+display:flex;
+margin-top:10px;
+flex-direction:column;
+justify-content:center;
+
+text-align:center;
 
 
+
+
+
+
+`;
+
+const TitleWrapper = styled.div`
+
+height:40px;
+margin-bottom:10px;
 
 h3{
     color:red;
-    
+    font-size: 18px;
 }
+`;
+const RelaseDateWrapper = styled.div`
 
+margin-top: 20px;
 
 p{
     color:green;
 }
 `;
-
