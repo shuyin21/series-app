@@ -1,21 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const ShowCard = ({ show }) => {
+const ShowCard = ({ getId, show }) => {
 
-    let showId = '';
 
-    const getId = () => {
+    // const [idState, setIdState] = useState('');
 
-        showId = show.show.id;
-        console.log(showId);
-    }
+    // const getId = (e) => {
+    //     e.preventDefault();
+
+    //     setIdState(show.show.id);
+    //     console.log(show.show.id);
+    // }
 
 
 
     return (
 
-        <CardWrapper onClick={getId}>
+        <CardWrapper onClick={() => getId(show.show.id)}>
 
             <ImageWrapper>
                 {
@@ -39,8 +41,10 @@ const ShowCard = ({ show }) => {
 
         </CardWrapper>
     )
+}
 
-};
+
+    ;
 
 export default ShowCard;
 

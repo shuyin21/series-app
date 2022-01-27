@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import Details from '../components/DetailsComponent';
 import ShowCard from '../components/ShowCard';
 
 const Homepage = () => {
 
 
-    const [series, setSeries] = useState('game');
+    const [seriesId, setSeriesId] = useState('game');
     const [search, setSearch] = useState('');
 
     const [show, setShow] = useState([]);
@@ -26,19 +27,7 @@ const Homepage = () => {
 
     }
 
-    // const getSeries = async () => {
-    //     const url = `https://api.tvmaze.com/schedule/web?date=2021-12-16&country=US`
-    //     await fetch(url)
 
-    //         .then((res) => res.text())
-    //         .then((text) => text.length ? JSON.parse(text) : {})
-    //         .then(data => { console.log(data); setShow(data) }) //api data will be visible in your browser console. 
-
-    //         .catch(err => console.warn("ERROR", err));
-
-    //     console.log(show);
-
-    // }
 
 
 
@@ -55,7 +44,7 @@ const Homepage = () => {
     }, [])
 
 
-
+    console.log(seriesId);
 
 
     return (
@@ -69,17 +58,13 @@ const Homepage = () => {
                 />
             </Form>
             <HomeWrapper>
-
                 {show.map(series => (
-                    <ShowCard key={series.show.id} show={series} />
+                    <ShowCard key={series.show.id} getId={seriesId => setSeriesId(seriesId)} show={series} />
 
                 ))}
 
-
-
-
-
             </HomeWrapper>
+            <Details seriesId={seriesId} />
         </Home>
     );
 };
