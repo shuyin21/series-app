@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import styled from 'styled-components';
 
 const Details = (props) => {
 
-    console.log();
+
 
     const [showDetails, setShowDetails] = useState([]);
-
+    const [seriesId, setSeriesId] = useState('');
 
     const dId = props.seriesId;
+
 
 
     const getDetails = async (query) => {
@@ -18,25 +19,31 @@ const Details = (props) => {
 
             .then((res) => res.text())
             .then((text) => text.length ? JSON.parse(text) : {})
-            .then(data => { console.log(data); setShowDetails(data) }) //api data will be visible in your browser console. 
+            .then(data => { setShowDetails(data) }) //api data will be visible in your browser console. 
 
             .catch(err => console.warn("ERROR", err));
 
         console.log(showDetails);
 
     }
-
-
-    const handleFetch = (e) => {
-        e.preventDefault();
+    useEffect(() => {
+        // handleFetch();
         getDetails(dId);
-    }
+    }, [props.isClicked])
+
+    // const handleFetch = () => {
+
+    //     getDetails(dId);
+    // }
+
+
+
 
     return (
         <Wrapper>
 
             <h1>{showDetails.name}</h1>
-            <button onClick={handleFetch}>Click</button>
+            {/* <button onClick={handleFetch}>Click</button> */}
 
         </Wrapper>
 

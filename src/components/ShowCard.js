@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const ShowCard = ({ getId, show }) => {
+const ShowCard = ({ getId, show, clicked, isClicked }) => {
 
 
     // const [idState, setIdState] = useState('');
@@ -15,9 +15,11 @@ const ShowCard = ({ getId, show }) => {
 
 
 
+
+
     return (
 
-        <CardWrapper onClick={() => getId(show.show.id)}>
+        <CardWrapper onClick={() => { getId(show.show.id); clicked(!isClicked) }}>
 
             <ImageWrapper>
                 {

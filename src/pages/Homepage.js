@@ -9,6 +9,7 @@ const Homepage = () => {
     const [seriesId, setSeriesId] = useState('game');
     const [search, setSearch] = useState('');
 
+    const [isClicked, setIsClicked] = useState(false);
     const [show, setShow] = useState([]);
 
 
@@ -23,7 +24,7 @@ const Homepage = () => {
 
             .catch(err => console.warn("ERROR", err));
 
-        console.log(show);
+        // console.log(show);
 
     }
 
@@ -44,7 +45,7 @@ const Homepage = () => {
     }, [])
 
 
-    console.log(seriesId);
+    console.log(isClicked);
 
 
     return (
@@ -59,12 +60,12 @@ const Homepage = () => {
             </Form>
             <HomeWrapper>
                 {show.map(series => (
-                    <ShowCard key={series.show.id} getId={seriesId => setSeriesId(seriesId)} show={series} />
+                    <ShowCard isClicked={isClicked} key={series.show.id} clicked={isClicked => { setIsClicked(isClicked) }} getId={seriesId => setSeriesId(seriesId)} show={series} />
 
                 ))}
 
             </HomeWrapper>
-            <Details seriesId={seriesId} />
+            <Details seriesId={seriesId} isClicked={isClicked} />
         </Home>
     );
 };
