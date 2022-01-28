@@ -6,11 +6,16 @@ import ShowCard from '../components/ShowCard';
 const Homepage = () => {
 
 
-    const [seriesId, setSeriesId] = useState('game');
+    const [seriesId, setSeriesId] = useState('');
     const [search, setSearch] = useState('');
 
     const [isClicked, setIsClicked] = useState(false);
     const [show, setShow] = useState([]);
+    const [banner, setBanner] = useState([]);
+
+    useEffect(() => {
+        getBanner(1);
+    }, [])
 
 
 
@@ -28,8 +33,15 @@ const Homepage = () => {
 
     }
 
-
-
+    const getBanner = async (id) => {
+        const url = `https://api.tvmaze.com/shows/${id}/images`
+        await fetch(url)
+            .then((res) => res.text())
+            .then((text) => text.length ? JSON.parse(text) : {})
+            .then(data => { setBanner(data) })
+            .catch(err => console.warn("ERROR", err));
+        console.log(banner);
+    }
 
 
 
