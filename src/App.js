@@ -4,7 +4,7 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Homepage from './pages/Homepage';
 
-
+import Nav from './components/Nav'
 
 
 
@@ -13,6 +13,7 @@ import Homepage from './pages/Homepage';
 function App() {
   return (
     <Router>
+      <nav />
       <Routes>
         <Route path='/' exact element={<Homepage />} />
 

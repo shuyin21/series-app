@@ -8,8 +8,9 @@ const Details = (props) => {
 
     const [showDetails, setShowDetails] = useState([]);
     const [seriesId, setSeriesId] = useState('');
+    const [detailsClick, setDetailsClick] = useState('');
 
-    const dId = props.seriesId;
+    let dId = 43687;
 
 
 
@@ -26,10 +27,21 @@ const Details = (props) => {
         console.log(showDetails);
 
     }
-    useEffect(() => {
-        // handleFetch();
+    console.log(detailsClick);
+
+    if (detailsClick === true) {
+
+        dId = props.seriesId;
         getDetails(dId);
-    }, [props.isClicked])
+        setDetailsClick(false);
+    } else {
+        console.log('not clicked');
+    }
+    // useEffect(() => {
+    //     // handleFetch();
+    //     dId = props.seriesId;
+    //     getDetails(dId);
+    // }, [props.isClicked])
 
     // const handleFetch = () => {
 
