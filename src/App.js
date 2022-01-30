@@ -13,7 +13,7 @@ import Nav from './components/Nav'
 function App() {
   return (
     <Router>
-      <nav />
+      <Nav />
       <Routes>
         <Route path='/' exact element={<Homepage />} />
 
