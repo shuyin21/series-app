@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import { Link } from 'react-router-dom';
 
 const Nav = () => {
     return (
@@ -9,9 +9,9 @@ const Nav = () => {
             <NavWrapper>
                 <Logo>The Show Finder</Logo>
                 <ul>
-                    <li>New Shows</li>
-                    <li>Best Shows by Year</li>
-                    <li>Find Actors</li>
+                    <li><LinkR to='login'>New Shows</LinkR></li>
+                    <li><LinkR to='profile'>Best Shows by Year</LinkR></li>
+                    <li><LinkR to='/'>Find Actors</LinkR></li>
                 </ul>
             </NavWrapper>
         </>
@@ -40,15 +40,14 @@ ul{
     justify-content:space-between;
     margin-right:10%;
     li{
-        
+       
         list-style: none;
         color:#fff;
         cursor:pointer;
         font-weight: bold;
 
-        &:hover{
-            color:red;
-        }
+        
+       
     }
 }
 
@@ -67,4 +66,12 @@ font-weight: bold;
 color:#fff;
 cursor:pointer;
 
+`;
+
+const LinkR = styled(Link)`
+color:#fff;
+text-decoration:none;
+&:hover{
+            color:red;
+        }
 `;
