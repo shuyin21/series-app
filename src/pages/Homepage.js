@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Details from '../components/DetailsComponent';
+
 import ShowCard from '../components/ShowCard';
+import { useSelector, useDispatch } from 'react-redux';
+import { findShow } from '../features/showFinder';
+import { showDetails } from '../features/showDetails';
 
 const Homepage = () => {
+    const dispatch = useDispatch();
+    const detailsShower = useSelector((state) => state.showDetails.value);
+    const showState = useSelector((state) => state.show.value);
 
 
-    const [seriesId, setSeriesId] = useState('');
     const [search, setSearch] = useState('');
-
-    const [isClicked, setIsClicked] = useState(false);
     const [show, setShow] = useState([]);
     const [banner, setBanner] = useState([]);
 
-    useEffect(() => {
-        getBanner(1);
-    }, [])
+    // useEffect(() => {
+    //     getBanner(1);
+    // }, [])
 
-
+    console.log(showState);
 
     const getSeries = async (query) => {
         const url = `https://api.tvmaze.com/search/shows?q=${query}&limit=20`
@@ -29,7 +32,7 @@ const Homepage = () => {
 
             .catch(err => console.warn("ERROR", err));
 
-        // console.log(show);
+
 
     }
 
@@ -49,16 +52,23 @@ const Homepage = () => {
         e.preventDefault();
 
         getSeries(search);
+        dispatch(findShow(search));
+        dispatch(showDetails(false));
         setSearch('');
     }
     useEffect(() => {
-        getSeries();
+        getSeries(showState);
 
     }, [])
 
 
-    console.log(isClicked);
 
+
+
+    const handleShowSearch = (e) => {
+        setSearch(e.target.value);
+
+    }
 
     return (
         <Home>
@@ -67,17 +77,18 @@ const Homepage = () => {
                 <input type='search' value={search}
                     placeholder='search for the show'
                     required
-                    onChange={e => setSearch(e.target.value)}
+                    onChange={handleShowSearch}
                 />
             </Form>
+
             <HomeWrapper>
                 {show.map(series => (
-                    <ShowCard isClicked={isClicked} key={series.show.id} clicked={isClicked => { setIsClicked(isClicked) }} getId={seriesId => setSeriesId(seriesId)} show={series} />
+                    <ShowCard key={series.show.id} show={series} />
 
                 ))}
 
             </HomeWrapper>
-            <Details seriesId={seriesId} isClicked={isClicked} />
+
         </Home>
     );
 };

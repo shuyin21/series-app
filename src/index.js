@@ -5,17 +5,15 @@ import App from './App';
 
 import { configureStore } from '@reduxjs/toolkit';
 
-// import { createStore } from 'redux';
-// import allReducer from './redux/reducers/index.js';
-import userReducer from './features/users';
+
 import { Provider } from 'react-redux';
+import allReducer from './features/rootReducer';
 
 
 const store = configureStore({
-  reducer: {
-    user: userReducer,
+  reducer:
+    allReducer
 
-  },
 });
 
 

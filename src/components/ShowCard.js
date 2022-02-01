@@ -1,26 +1,28 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { findId } from '../features/idFinder';
+import { showDetails } from '../features/showDetails';
 
-const ShowCard = ({ getId, show, clicked, isClicked }) => {
+const ShowCard = ({ show }) => {
 
-
-    // const [idState, setIdState] = useState('');
-
-    // const getId = (e) => {
-    //     e.preventDefault();
-
-    //     setIdState(show.show.id);
-    //     console.log(show.show.id);
-    // }
+    const dispatch = useDispatch();
 
 
 
+
+    const handleIdFind = () => {
+        dispatch(findId(show.show.id));
+        dispatch(showDetails(true));
+
+    }
 
 
     return (
 
-        <CardWrapper onClick={() => { getId(show.show.id); clicked(!isClicked) }}>
-
+        <CardWrapper  >
+            <Linker to='details' onClick={handleIdFind} />
             <ImageWrapper>
                 {
 
@@ -58,6 +60,12 @@ width:200px;
 display:flex;
 justify-content:space-between;
 flex-direction:column;
+`;
+
+const Linker = styled(Link)`
+width:200px;
+height:350px;
+position:absolute;
 `;
 const ImageWrapper = styled.div`
 

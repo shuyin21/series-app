@@ -10,7 +10,7 @@ const Nav = () => {
                 <Logo>The Show Finder</Logo>
                 <ul>
                     <li><LinkR to='login'>New Shows</LinkR></li>
-                    <li><LinkR to='profile'>Best Shows by Year</LinkR></li>
+                    <li><LinkR to='details'>Best Shows by Year</LinkR></li>
                     <li><LinkR to='/'>Find Actors</LinkR></li>
                 </ul>
             </NavWrapper>

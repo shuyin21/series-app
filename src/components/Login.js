@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux';
-import { login } from '../features/users';
+import { login, logout } from '../features/users';
+import ChangeColor from './ChangeColor';
 
 function Login() {
 
@@ -11,9 +12,10 @@ function Login() {
 
 
         <LoginWrapper>
-
+            <ChangeColor />
 
             <Button onClick={() => { dispatch(login({ name: 'Gyula', age: 36, email: 'shuyin21@gmail.com' })) }}>Login</Button>
+            <Button onClick={() => { dispatch(logout()) }}>Logout</Button>
         </LoginWrapper>);
 }
 

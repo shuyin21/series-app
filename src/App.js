@@ -6,7 +6,7 @@ import Homepage from './pages/Homepage';
 
 import Nav from './components/Nav'
 import Login from './components/Login';
-import Profile from './pages/Profile';
+import Details from './pages/DetailsPage';
 
 
 
@@ -18,7 +18,7 @@ function App() {
       <Nav />
       <Routes>
         <Route path='/' exact element={<Homepage />} />
-        <Route path='/profile' exact element={<Profile />} />
+        <Route path='/details' exact element={<Details />} />
         <Route path='/login' exact element={<Login />} />
 
 
