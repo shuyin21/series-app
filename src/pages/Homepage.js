@@ -10,11 +10,18 @@ const Homepage = () => {
     const dispatch = useDispatch();
     const detailsShower = useSelector((state) => state.showDetails.value);
     const showState = useSelector((state) => state.show.value);
-
+    const showId = useSelector((state) => state.findId.value);
 
     const [search, setSearch] = useState('');
     const [show, setShow] = useState([]);
     const [banner, setBanner] = useState([]);
+
+
+    const [bannerHolder, setBannerHolder] = useState({
+        banner1: 'https://static.tvmaze.com/uploads/images/medium_leaderboard/387/969147.jpg',
+        banner2: 'https://static.tvmaze.com/uploads/images/original_untouched/362/906898.jpg',
+        banner3: 'https://static.tvmaze.com/uploads/images/original_untouched/387/969147.jpg',
+    })
 
     // useEffect(() => {
     //     getBanner(1);
@@ -58,10 +65,10 @@ const Homepage = () => {
     }
     useEffect(() => {
         getSeries(showState);
-
+        getBanner(showId);
     }, [])
 
-
+    console.log(banner);
 
 
 
@@ -72,6 +79,7 @@ const Homepage = () => {
 
     return (
         <Home>
+            <Banner src={bannerHolder.banner3} />
             <h1>The Series Finder</h1>
             <Form onSubmit={handleSearch}>
                 <input type='search' value={search}
@@ -96,15 +104,30 @@ const Homepage = () => {
 export default Homepage;
 
 const Home = styled.div`
+
+width:100vw;
+height: 100%;
 display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
+background-color: #000;
 
+h1{
+    color: #fff;
+}
 `;
 
+
+const Banner = styled.img`
+max-width:758px;
+height:140px;
+margin-top: 50px;;
+
+`;
 const HomeWrapper = styled.div`
-width:100vw;
+width:100%;
+padding:0 5%;
 display: flex;
 justify-content: center;
 flex-wrap: wrap;

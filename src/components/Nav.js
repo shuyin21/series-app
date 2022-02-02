@@ -29,8 +29,11 @@ height:50px;
 display:flex;
 padding:0;
 margin:0;
+align-items:center;
 justify-content:space-between;
 background-color: #333;
+position:relative;
+
 
 
 ul{

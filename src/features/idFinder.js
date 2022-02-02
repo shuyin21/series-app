@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialStateValue = 82;
+const initialStateValue = 52523;
 
 export const idFinderSlice = createSlice({
     name: 'findId',

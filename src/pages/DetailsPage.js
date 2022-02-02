@@ -21,16 +21,17 @@ const Details = (props) => {
 
 
     const getDetails = async (query) => {
-        const url = `https://api.tvmaze.com/shows/${query}`
+        const url = `https://api.tvmaze.com/shows/${query}`;
+
         await fetch(url)
 
             .then((res) => res.text())
             .then((text) => text.length ? JSON.parse(text) : {})
-            .then(data => { setDetails(data) }) //api data will be visible in your browser console. 
+            .then(data => { setDetails(data); }) //api data will be visible in your browser console. 
 
             .catch(err => console.warn("ERROR", err));
 
-        // console.log(details);
+
 
     }
 
@@ -39,33 +40,36 @@ const Details = (props) => {
         console.log(details);
     }, [showId])
 
-    // getDetails(showId);
 
 
     const handleDetailClose = () => {
         dispatch(showDetails(false));
     }
+    console.log(details);
     return (
-        <Wrapper>
-            {details.image ? <Image src={details.image.original} />
-                : <Image src='https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg' />}
+        <DetailMain>
+            <Wrapper>
+                {details.image ? <Image src={details.image.original} />
+                    : <Image src='https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg' />}
 
 
-            <DetailsWrapper>
-                <CloseButton to='/' onClick={handleDetailClose}><CloseBtn /></CloseButton>
-                <h1>{details.name}</h1>
-                <Detail>
-                    <Wrap><h3>Genre: </h3><p> {details.genres}</p></Wrap>
-                    <Wrap><h3>Language: </h3><p> {details.language}</p></Wrap>
-                    <Wrap><h3>Premiered: </h3><p> {details.premiered}</p></Wrap>
-                    {details.summary}
+                <DetailsWrapper>
+                    <CloseButton to='/' onClick={handleDetailClose}><CloseBtn /></CloseButton>
+                    <h1>{details.name}</h1>
+                    <Detail>
+                        <Wrap><h3>Genre: </h3><p> {details.genres}</p></Wrap>
+                        <Wrap><h3>Language: </h3><p> {details.language}</p></Wrap>
+                        <Wrap><h3>Premiered: </h3><p> {details.premiered}</p></Wrap>
 
-                </Detail>
-            </DetailsWrapper>
-            {/* <button onClick={handleFetch}>Click</button> */}
 
-        </Wrapper>
+                        <SummaryDiv dangerouslySetInnerHTML={{ __html: details.summary }} />
 
+                    </Detail>
+                </DetailsWrapper>
+                {/* <button onClick={handleFetch}>Click</button> */}
+
+            </Wrapper>
+        </DetailMain>
 
 
 
@@ -76,19 +80,31 @@ const Details = (props) => {
 export default Details;
 
 
+const DetailMain = styled.div`
+width:100%;
+height:900px;
+
+display:flex;
+padding:0 10%;
+justify-content: space-between;
+background-color: #000;
+
+`;
+
 const Wrapper = styled.div`
 width:100vw;
-height:100%;
-margin-top:100px;
+
+margin-top:50px;
 display:flex;
-padding:0 5%;
+padding:0 10%;
 justify-content: space-between;
+background-color: #000;
 
 
 `;
 
 const Image = styled.img`
-width:50vw;
+width:30vw;
 height:80vh;
 
 `;
@@ -96,8 +112,12 @@ height:80vh;
 const DetailsWrapper = styled.div`
 
 width:40%;
-margin-left:50px;
+
+
+background-color: #000;
+color: #fff;
 h1{
+    margin-top:50px;
     text-align: center;
 }
 `;
@@ -110,7 +130,7 @@ justify-content: flex-end;
 `;
 
 const CloseBtn = styled(FaWindowClose)`
-color:#000;
+color:#fff;
 width:40px;
 height:30px;
 
@@ -120,7 +140,7 @@ const Detail = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
-margin-top:50px;
+margin-top:100px;
 
 
 
@@ -139,7 +159,13 @@ h3{
     color:red;
 
 }
+font-weight:bold;
 
+
+`;
+
+const SummaryDiv = styled.div`
+margin-top:50px;
 
 
 `;
