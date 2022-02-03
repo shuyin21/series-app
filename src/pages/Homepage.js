@@ -15,6 +15,7 @@ const Homepage = () => {
     const [search, setSearch] = useState('');
     const [show, setShow] = useState([]);
     const [banner, setBanner] = useState([]);
+    const [cast, setCast] = useState([]);
 
 
     const [bannerHolder, setBannerHolder] = useState({
@@ -23,14 +24,12 @@ const Homepage = () => {
         banner3: 'https://static.tvmaze.com/uploads/images/original_untouched/387/969147.jpg',
     })
 
-    // useEffect(() => {
-    //     getBanner(1);
-    // }, [])
 
     console.log(showState);
 
     const getSeries = async (query) => {
         const url = `https://api.tvmaze.com/search/shows?q=${query}&limit=20`
+
         await fetch(url)
 
             .then((res) => res.text())
@@ -42,6 +41,8 @@ const Homepage = () => {
 
 
     }
+
+
 
     const getBanner = async (id) => {
         const url = `https://api.tvmaze.com/shows/${id}/images`
@@ -66,6 +67,7 @@ const Homepage = () => {
     useEffect(() => {
         getSeries(showState);
         getBanner(showId);
+
     }, [])
 
     console.log(banner);

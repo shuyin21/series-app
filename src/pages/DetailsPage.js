@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { showDetails } from '../features/showDetails';
 import { FaWindowClose } from 'react-icons/fa';
+import CastCard from '../components/CastCard';
 
 const Details = (props) => {
 
@@ -14,12 +15,12 @@ const Details = (props) => {
 
 
     const [details, setDetails] = useState([]);
+    const [cast, setCast] = useState([]);
 
 
 
 
-
-
+    // get the datails of the series
     const getDetails = async (query) => {
         const url = `https://api.tvmaze.com/shows/${query}`;
 
@@ -35,8 +36,18 @@ const Details = (props) => {
 
     }
 
+    // get the show cast
+    const getCast = async (id) => {
+        const url = `https://api.tvmaze.com/shows/${id}/cast`
+        await fetch(url)
+            .then((res) => res.text())
+            .then((text) => text.length ? JSON.parse(text) : {})
+            .then(data => { console.log(data); setCast(data) })
+    }
+
     useEffect(() => {
         getDetails(showId);
+        getCast(showId);
         console.log(details);
     }, [showId])
 
@@ -65,10 +76,15 @@ const Details = (props) => {
                         <SummaryDiv dangerouslySetInnerHTML={{ __html: details.summary }} />
 
                     </Detail>
+
                 </DetailsWrapper>
                 {/* <button onClick={handleFetch}>Click</button> */}
 
             </Wrapper>
+            <Cast><h1>Cast</h1></Cast>
+            <CastWrapper>
+                {cast.map(actor => (<CastCard key={actor.person.id} actor={actor} />))}
+            </CastWrapper>
         </DetailMain>
 
 
@@ -85,6 +101,7 @@ width:100%;
 height:900px;
 
 display:flex;
+flex-direction:column;
 padding:0 10%;
 justify-content: space-between;
 background-color: #000;
@@ -92,7 +109,7 @@ background-color: #000;
 `;
 
 const Wrapper = styled.div`
-width:100vw;
+
 
 margin-top:50px;
 display:flex;
@@ -167,5 +184,27 @@ font-weight:bold;
 const SummaryDiv = styled.div`
 margin-top:50px;
 
+
+`;
+
+const Cast = styled.div`
+display:flex;
+align-items: center;
+justify-content: center;
+height:100px;
+width:100%;
+color: #fff;
+margin-top:50px;
+`;
+
+const CastWrapper = styled.div`
+width:100%;
+display:flex;
+flex-direction: row;
+flex-wrap:wrap;
+height:300px;
+margin-top:50px;
+justify-content: center;
+align-items: center;
 
 `;
