@@ -83,7 +83,7 @@ const Details = (props) => {
             </Wrapper>
             <Cast><h1>Cast</h1></Cast>
             <CastWrapper>
-                {cast.map(actor => (<CastCard key={actor.person.id} actor={actor} />))}
+                {cast.map(actor => (<CastCard key={actor.character.id} actor={actor} />))}
             </CastWrapper>
         </DetailMain>
 

@@ -13,6 +13,8 @@ const CastCard = ({ actor }) => {
             }
             <NameWrapper><Name>{actor.person.name}</Name></NameWrapper>
 
+            <NameWrapper><Character>{actor.character.name}</Character></NameWrapper>
+
         </CastWrapper>
 
 
@@ -27,15 +29,17 @@ max-height:300px;
 max-width: 150px;
 display:flex;
 flex-direction:column;
-margin:0 10px;
+margin:10px 15px;
 align-items:center;
 
-
+p{
+    color:#fff;
+}
 `;
 
 const ActorLink = styled(Link)`
-height:100%;
-width:100%;
+height:200px;
+width:150px;
 position:absolute;
 
 
@@ -50,10 +54,18 @@ const NameWrapper = styled.div`
 width:100%;
 height:50px;
 text-align:center;
+
+
 `;
 
 
 const Name = styled.h3`
 font-weight:bold;
 color:#fff;
+
+`;
+
+const Character = styled.h4`
+color:red;
+font-size:12px;
 `;

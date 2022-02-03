@@ -5,6 +5,7 @@ import ShowCard from '../components/ShowCard';
 import { useSelector, useDispatch } from 'react-redux';
 import { findShow } from '../features/showFinder';
 import { showDetails } from '../features/showDetails';
+import BannerComp from '../components/Banner';
 
 const Homepage = () => {
     const dispatch = useDispatch();
@@ -14,15 +15,10 @@ const Homepage = () => {
 
     const [search, setSearch] = useState('');
     const [show, setShow] = useState([]);
-    const [banner, setBanner] = useState([]);
-    const [cast, setCast] = useState([]);
 
 
-    const [bannerHolder, setBannerHolder] = useState({
-        banner1: 'https://static.tvmaze.com/uploads/images/medium_leaderboard/387/969147.jpg',
-        banner2: 'https://static.tvmaze.com/uploads/images/original_untouched/362/906898.jpg',
-        banner3: 'https://static.tvmaze.com/uploads/images/original_untouched/387/969147.jpg',
-    })
+
+
 
 
     console.log(showState);
@@ -44,15 +40,7 @@ const Homepage = () => {
 
 
 
-    const getBanner = async (id) => {
-        const url = `https://api.tvmaze.com/shows/${id}/images`
-        await fetch(url)
-            .then((res) => res.text())
-            .then((text) => text.length ? JSON.parse(text) : {})
-            .then(data => { setBanner(data) })
-            .catch(err => console.warn("ERROR", err));
-        console.log(banner);
-    }
+
 
 
 
@@ -66,11 +54,10 @@ const Homepage = () => {
     }
     useEffect(() => {
         getSeries(showState);
-        getBanner(showId);
 
     }, [])
 
-    console.log(banner);
+
 
 
 
@@ -81,7 +68,7 @@ const Homepage = () => {
 
     return (
         <Home>
-            <Banner src={bannerHolder.banner3} />
+            <BannerComp />
             <h1>The Series Finder</h1>
             <Form onSubmit={handleSearch}>
                 <input type='search' value={search}
@@ -121,12 +108,7 @@ h1{
 `;
 
 
-const Banner = styled.img`
-max-width:758px;
-height:140px;
-margin-top: 50px;;
 
-`;
 const HomeWrapper = styled.div`
 width:100%;
 padding:0 5%;
