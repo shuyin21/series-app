@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { useDispatch } from 'react-redux';
 import { login, logout } from '../features/users';
 import ChangeColor from './ChangeColor';
+import StreamingList from './StreamingList';
 
 function Login() {
 
@@ -12,10 +13,7 @@ function Login() {
 
 
         <LoginWrapper>
-            <ChangeColor />
-
-            <Button onClick={() => { dispatch(login({ name: 'Gyula', age: 36, email: 'shuyin21@gmail.com' })) }}>Login</Button>
-            <Button onClick={() => { dispatch(logout()) }}>Logout</Button>
+            <StreamingList />
         </LoginWrapper>);
 }
 
