@@ -11,7 +11,8 @@ const BannerComp = () => {
         { image: 'https://static.tvmaze.com/uploads/images/medium_leaderboard/387/969147.jpg' }
         , { image: 'https://static.tvmaze.com/uploads/images/original_untouched/362/906898.jpg' },
         { image: 'https://static.tvmaze.com/uploads/images/medium_leaderboard/387/969186.jpg' },
-        { image: 'https://static.tvmaze.com/uploads/images/medium_leaderboard/390/976667.jpg' }]
+        { image: 'https://static.tvmaze.com/uploads/images/medium_leaderboard/390/976667.jpg' },
+        { image: 'https://static.tvmaze.com/uploads/images/original_untouched/384/960593.jpg' },]
 
     const length = bannerHolder.length;
 
@@ -45,7 +46,7 @@ export default BannerComp;
 
 
 const BannerWrapper = styled.img`
-max-width:758px;
+max-width:60vw;
 height:140px;
 margin-top: 50px;;
 

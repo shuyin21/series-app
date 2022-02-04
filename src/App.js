@@ -12,6 +12,7 @@ import Details from './pages/DetailsPage';
 
 
 
+
 function App() {
   return (
     <Router>
@@ -23,6 +24,7 @@ function App() {
 
 
       </Routes>
+
     </Router>
   );
 }
