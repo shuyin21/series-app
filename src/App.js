@@ -16,7 +16,7 @@ import Details from './pages/DetailsPage';
 function App() {
   return (
     <Router>
-      <Nav />
+      {/* <Nav /> */}
       <Routes>
         <Route path='/' exact element={<Homepage />} />
         <Route path='/details' exact element={<Details />} />

@@ -38,7 +38,7 @@ const MovieTrailer = () => {
 
       // Using 'ReactPlayer' component to
             // display the video
-            <ReactPlayer
+            <ReactPlayerBox
                 url={[videoURL[1].src, videoURL[0].src]}
                 playing
                 muted
@@ -65,8 +65,20 @@ display: flex;
     align-items: center;
     text-align: center;
     height: 400px;
-    width: 60vw;
+    width: 65vw;
     font-size: 22px;
+
+
+    @media screen and (max-width:768px){
+    padding:0;
+    width:40vw;
+    height:500px;
+}
+`;
+
+const ReactPlayerBox = styled(ReactPlayer)`
+width:100vw;
+height:100%;
 
 `;
 

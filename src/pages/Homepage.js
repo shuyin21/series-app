@@ -129,6 +129,10 @@ justify-content: space-between;
 align-items: center;
 padding:0 40px;
 
+
+@media screen and (max-width:768px){
+    padding:0;
+}
 h1{
     color: #fff;
 }
@@ -137,6 +141,10 @@ h1{
 const LeftSide = styled.div`
 width:20vw;
 position:relative;
+
+@media screen and (max-width:768px){
+    display:none;
+}
 `;
 
 const Middle = styled.div`
@@ -145,10 +153,16 @@ align-items: center;
 justify-content: center;
 text-align: center;
 
+
+@media screen and (max-width:768px){
+    width:100%;
+}
 `;
 const RightSide = styled.div`
 width:20vw;
-
+@media screen and (max-width:768px){
+    display:none;
+}
 `;
 
 const HomeWrapper = styled.div`
@@ -158,6 +172,8 @@ flex-wrap: wrap;
 align-items: center;
 justify-content: center;
 padding:0 10%;
+
+
 `;
 
 const Form = styled.form`

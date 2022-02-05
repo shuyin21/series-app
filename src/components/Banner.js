@@ -46,8 +46,13 @@ export default BannerComp;
 
 
 const BannerWrapper = styled.img`
-max-width:60vw;
+
 height:140px;
 margin-top: 50px;;
 
+@media screen and (max-width:768px){
+    
+    max-width:unset;
+    width: 100vw;
+}
 `;

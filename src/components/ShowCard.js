@@ -60,12 +60,21 @@ width:200px;
 display:flex;
 justify-content:space-between;
 flex-direction:column;
+
+@media screen and (max-width: 768px){
+    width:400px;
+   
+}
 `;
 
 const Linker = styled(Link)`
 width:200px;
 height:350px;
 position:absolute;
+
+@media screen and (max-width: 768px){
+    width:400px;
+}
 `;
 const ImageWrapper = styled.div`
 
@@ -82,6 +91,10 @@ const ImageHolder = styled.img`
 						box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.15);
 						transition: 0.4s;
                         cursor: pointer;
+
+                        @media screen and (max-width: 768px){
+    height:400px;
+}
 
 &:hover{
                         box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.25);
