@@ -3,17 +3,12 @@ import styled from 'styled-components';
 import { FaStarHalfAlt } from 'react-icons/fa';
 const StreamingList = () => {
 
-    const [todayDate, setTodayDate] = useState("2022-02-02");
+    const [todayDate, setTodayDate] = useState("2022-02-08");
     const [schedules, setSchedules] = useState([]);
 
     const getTodayDate = () => {
         let d = new Date().toISOString();
-        // let y = d.getFullYear();
-        // let m = d.getMonth() + 1;
 
-        // let day = d.getDate();
-
-        // setTodayDate((y + '-' + m + '-' + day).toISOString());
         let y = d.slice(0, 10);
         setTodayDate(y);
     }
