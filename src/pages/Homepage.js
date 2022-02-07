@@ -96,13 +96,13 @@ const Homepage = () => {
                     </Form>
                     <MovieTrailer /> */}
                     <CardWrapper>
-                        <ChannelCard image={Disney} />
-                        <ChannelCard image={HboMax} />
-                        <ChannelCard image={PrimeV} />
+                        <ChannelCard image={Disney} linkTo='details' />
+                        <ChannelCard image={HboMax} linkTo='details' />
+                        <ChannelCard image={PrimeV} linkTo='details' />
                     </CardWrapper>
                     <LongCardWrapper>
-                        <ChannelCard image={Netflix} />
-                        <ChannelCard image={appleTv} />
+                        <ChannelCard image={Netflix} linkTo='details' />
+                        <ChannelCard image={appleTv} linkTo='details' />
                     </LongCardWrapper>
 
                 </Middle>
