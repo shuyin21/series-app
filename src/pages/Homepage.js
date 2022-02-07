@@ -143,7 +143,7 @@ width:100vw;
 display: flex;
 align-items: center;
 flex-direction:column;
-overflow: hidden;
+overflow-x: hidden;
 `;
 const Home = styled.div`
 display:flex;

@@ -108,6 +108,7 @@ margin-top:20px;
     height:100%;
     width: 5vw;
     z-index:1;
+    
     &:hover{
         opacity: 1;
         transition: opacity 0.2s ease 0s;
