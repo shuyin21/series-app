@@ -7,7 +7,7 @@ const Nav = () => {
         <>
 
             <NavWrapper>
-                <Logo>The Show Finder</Logo>
+                <Logo>The Series Finder</Logo>
                 <ul>
                     <li><LinkR to='login'>Today Shows</LinkR></li>
                     <li><LinkR to='details'>Best Shows by Year</LinkR></li>
@@ -24,24 +24,33 @@ export default Nav;
 
 
 const NavWrapper = styled.div`
-width: 100%;
+width: 100vw;
 height:50px;
 display:flex;
 padding:0;
 margin:0;
 align-items:center;
 justify-content:space-between;
-background-color: #333;
+background-color: #000;
 position:relative;
+
 
 
 
 ul{
     display:flex;
-    width:20%;
+    width:30%;
     align-items:space-between;
     justify-content:space-between;
     margin-right:10%;
+
+    @media screen and (max-width:1200px){
+        width:40%;
+    }
+    @media screen and (max-width:1200px){
+        display:none;
+    }
+
     li{
        
         list-style: none;
@@ -60,7 +69,7 @@ ul{
 
 const Logo = styled.div`
 height: 100%;
-width:20%;
+width:300px;
 display:flex;
 align-items:center;
 justify-content:center;
