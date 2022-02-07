@@ -117,13 +117,13 @@ const Homepage = () => {
 
 
             </Home>
-            <HomeWrapper>
+            {/* <HomeWrapper>
                 {show.map(series => (
                     <ShowCard key={series.show.id} show={series} />
 
                 ))}
 
-            </HomeWrapper>
+            </HomeWrapper> */}
             <Footer />
         </Main>
     );
