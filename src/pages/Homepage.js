@@ -139,7 +139,7 @@ export default Homepage;
 
 const Main = styled.div`
 width:100vw;
-height:100%;
+
 display: flex;
 align-items: center;
 flex-direction:column;
