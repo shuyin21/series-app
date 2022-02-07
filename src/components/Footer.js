@@ -23,9 +23,9 @@ export default Footer
 
 const FooterDiv = styled.div`
 width: 100vw;
-position: absolute;
-bottom:0;
-height:100px;
+position: relative;
+
+height:80px;
 background-color: #000;
 display: flex;
 justify-content: center;
