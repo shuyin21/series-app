@@ -40,7 +40,7 @@ export default ShowcaseBlock;
 const ShowcaseWrapper = styled.img`
 
 height:60vh;
-width:100%;
+width:90%;
 margin:5%;
 border:1px solid #fff;
 

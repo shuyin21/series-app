@@ -10,7 +10,7 @@ const MovieTrailer = () => {
     const [playingState, setPlayingState] = useState({ playing: false });
     const [video, setVideo] = useState("inception");
     const [videoURL, setVideoURL] =
-        useState([{ src: "https://youtu.be/ZTI6T5M8Fj0" }, { src: 'https://youtu.be/Jtdh0Tkqfdw' }
+        useState([{ src: 'https://youtu.be/6Jg_rkKtJgo' }, { src: "https://youtu.be/ZTI6T5M8Fj0" }, { src: 'https://youtu.be/Jtdh0Tkqfdw' }
         ]);
 
     //A function to fetch the required URL
@@ -39,7 +39,7 @@ const MovieTrailer = () => {
       // Using 'ReactPlayer' component to
             // display the video
             <ReactPlayerBox
-                url={[videoURL[1].src, videoURL[0].src]}
+                url={[videoURL[0].src, videoURL[1].src, videoURL[2].src]}
                 playing
                 muted
                 width="100%"

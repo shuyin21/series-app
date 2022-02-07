@@ -11,6 +11,7 @@ import Footer from '../components/Footer';
 import ShowcaseBlock from '../components/ShowcaseBlock';
 import { posterData } from '../components/imageData';
 import { GifPlayer } from 'react-gif-player';
+import ChannelCard from '../components/ChannelCard';
 
 
 const Homepage = () => {
@@ -81,7 +82,7 @@ const Homepage = () => {
                 <Middle>
                     {/* <GifP gif={netflixGif} /> */}
                     <BannerComp />
-                    <h1>The Series Finder</h1>
+                    {/* <h1>The Series Finder</h1>
                     <Form onSubmit={handleSearch}>
                         <input type='search' value={search}
                             placeholder='search for the show'
@@ -89,7 +90,12 @@ const Homepage = () => {
                             onChange={handleShowSearch}
                         />
                     </Form>
-                    <MovieTrailer />
+                    <MovieTrailer /> */}
+                    <CardWrapper>
+                        <ChannelCard />
+                        <ChannelCard />
+                        <ChannelCard />
+                    </CardWrapper>
 
                 </Middle>
 
@@ -148,7 +154,7 @@ position:relative;
 `;
 
 const Middle = styled.div`
-width:60vw;
+width:50vw;
 align-items: center;
 justify-content: center;
 text-align: center;
@@ -182,5 +188,15 @@ const Form = styled.form`
 input{
     text-align: center;
 }
+
+`;
+
+const CardWrapper = styled.div`
+position: relative;
+min-height:400px;
+overflow-x:hidden;
+display:flex;
+top: 72px;
+padding:20px;
 
 `;
