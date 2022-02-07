@@ -10,9 +10,13 @@ import MovieTrailer from '../components/MovieTrailer';
 import Footer from '../components/Footer';
 import ShowcaseBlock from '../components/ShowcaseBlock';
 import { posterData } from '../components/imageData';
-import { GifPlayer } from 'react-gif-player';
-import ChannelCard from '../components/ChannelCard';
 
+import ChannelCard from '../components/ChannelCard';
+import Disney from '../Images/disney+.png';
+import Netflix from '../Images/netflix.png';
+import PrimeV from '../Images/primeV.png';
+import HboMax from '../Images/hbo-max_logo_.jpg';
+import appleTv from '../Images/appleTv.jpg';
 
 const Homepage = () => {
     const dispatch = useDispatch();
@@ -25,7 +29,7 @@ const Homepage = () => {
 
 
 
-    const netflixGif = 'https://tenor.com/view/netflix-intro-binge-watch-gif-15122473';
+
 
 
     console.log(showState);
@@ -92,10 +96,14 @@ const Homepage = () => {
                     </Form>
                     <MovieTrailer /> */}
                     <CardWrapper>
-                        <ChannelCard />
-                        <ChannelCard />
-                        <ChannelCard />
+                        <ChannelCard image={Disney} />
+                        <ChannelCard image={HboMax} />
+                        <ChannelCard image={PrimeV} />
                     </CardWrapper>
+                    <LongCardWrapper>
+                        <ChannelCard image={Netflix} />
+                        <ChannelCard image={appleTv} />
+                    </LongCardWrapper>
 
                 </Middle>
 
@@ -148,7 +156,7 @@ const LeftSide = styled.div`
 width:20vw;
 position:relative;
 
-@media screen and (max-width:768px){
+@media screen and (max-width:1000px){
     display:none;
 }
 `;
@@ -160,13 +168,13 @@ justify-content: center;
 text-align: center;
 
 
-@media screen and (max-width:768px){
+@media screen and (max-width:1000px){
     width:100%;
 }
 `;
 const RightSide = styled.div`
 width:20vw;
-@media screen and (max-width:768px){
+@media screen and (max-width:1000px){
     display:none;
 }
 `;
@@ -193,10 +201,28 @@ input{
 
 const CardWrapper = styled.div`
 position: relative;
-min-height:400px;
+min-height:200px;
 overflow-x:hidden;
 display:flex;
+grid-template-columns: 30% 30% 30%;
 top: 72px;
 padding:20px;
 
+
+@media screen and (max-width: 768px){
+    padding:0;
+    
+}
+
+`;
+
+const LongCardWrapper = styled.div`
+
+position: relative;
+min-height:280px;
+overflow-x:hidden;
+display:flex;
+grid-template-columns: 50% 50%;
+top: 72px;
+padding:20px 10%;
 `;
