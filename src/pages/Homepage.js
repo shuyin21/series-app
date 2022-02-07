@@ -147,7 +147,7 @@ overflow-x: hidden;
 `;
 const Home = styled.div`
 display:flex;
-height:1000px;
+
 justify-content: space-between;
 align-items: center;
 padding:0 40px;
@@ -156,8 +156,9 @@ margin-bottom:50px;
 
 @media screen and (max-width:768px){
     padding:0;
-    height:60vh;
+    height:80vh;
     justify-content: space-around;
+    
 }
 h1{
     color: #fff;
