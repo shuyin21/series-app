@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ReactPlayer from 'react-player';
 import movieTrailer from 'movie-trailer';
-import { netflixTrailers } from './trailerData';
+
 import styled from 'styled-components';
 
 const MovieTrailer = (props) => {

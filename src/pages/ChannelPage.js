@@ -13,7 +13,8 @@ import disney from '../Images/disney.png';
 import hbo from '../Images/hbo.png';
 import prime from '../Images/prime.png';
 import apple from '../Images/apple.png';
-import { appleTrailers, disneyTrailers, hboTrailers, netflixTrailers, primeTrailers } from '../components/trailerData';
+import { appleTrailers, disneyTrailers, hboTrailers, netflixTrailers, primeTrailers } from '../data/trailerData';
+import WebCard from '../components/WebCard';
 
 const ChannelPage = ({ url }) => {
 
@@ -23,7 +24,7 @@ const ChannelPage = ({ url }) => {
     const showState = useSelector((state) => state.show.value);
     const showId = useSelector((state) => state.findId.value);
 
-    const [search, setSearch] = useState('');
+    const [search, setSearch] = useState('game');
     const [show, setShow] = useState([]);
     const [imgSrc, setImgSrc] = useState([
         netflix, disney, hbo, prime, apple
@@ -63,8 +64,8 @@ const ChannelPage = ({ url }) => {
     }
 
     useEffect(() => {
-        getSeries(showState);
-
+        // getSeries(showState);
+        getSeries(search);
         console.log(videoURL[webLogo][0].src);
 
 
@@ -75,6 +76,7 @@ const ChannelPage = ({ url }) => {
         setSearch(e.target.value);
 
     }
+    // console.log(show[1].show.image.medium);
     return (
 
         <Main>
@@ -93,9 +95,10 @@ const ChannelPage = ({ url }) => {
                     />
                 </Form>
             </Wrapper>
+            <WebCard />
             <HomeWrapper>
                 {show.map(series => (
-                    <ShowCard key={series.show.id} show={series} />
+                    <WebCard key={series.show.id} showName={series.show.name} img={series.show.image} />
 
                 ))}
 

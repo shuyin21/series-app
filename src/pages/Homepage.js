@@ -6,7 +6,7 @@ import BannerComp from '../components/Banner';
 
 import Footer from '../components/Footer';
 
-import { posterData } from '../components/imageData';
+import { posterData } from '../data/imageData';
 
 
 import ChannelCard from '../components/ChannelCard';
