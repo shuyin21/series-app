@@ -25,7 +25,7 @@ const ChannelCard = ({ image, linkTo }) => {
 
 const Container = styled.div`
     /* padding:0 0 10px; */
-    width:100%;
+    width:50%;
     height:150px;
     
     margin:20px;

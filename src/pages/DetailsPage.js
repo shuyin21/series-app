@@ -42,7 +42,7 @@ const Details = (props) => {
         await fetch(url)
             .then((res) => res.text())
             .then((text) => text.length ? JSON.parse(text) : {})
-            .then(data => { console.log(data); setCast(data) })
+            .then(data => { setCast(data) })
     }
 
     useEffect(() => {
@@ -56,7 +56,7 @@ const Details = (props) => {
     const handleDetailClose = () => {
         dispatch(showDetails(false));
     }
-    console.log(details);
+    // console.log(details);
     return (
         <DetailMain>
             <Wrapper>

@@ -4,6 +4,7 @@ import themeReducer from './theme';
 import showFinderReducer from './showFinder';
 import idFinderReducer from './idFinder';
 import detailsReducer from './showDetails';
+import logoReducer from './logoSelector';
 
 const allReducers = combineReducers({
 
@@ -12,6 +13,7 @@ const allReducers = combineReducers({
     show: showFinderReducer,
     findId: idFinderReducer,
     showDetails: detailsReducer,
+    logoDetails: logoReducer,
 
 
 });
