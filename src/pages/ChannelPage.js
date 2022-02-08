@@ -6,18 +6,34 @@ import ShowCard from '../components/ShowCard';
 import { useSelector, useDispatch } from 'react-redux';
 import { findShow } from '../features/showFinder';
 import { showDetails } from '../features/showDetails';
+import { showLogo } from '../features/logoSelector';
 import ShowcaseBlock from '../components/ShowcaseBlock';
+import netflix from '../Images/netflix.png';
+import disney from '../Images/disney.png';
+import hbo from '../Images/hbo.png';
+import prime from '../Images/prime.png';
+import apple from '../Images/apple.png';
+import { disneyTrailers, netflixTrailers } from '../components/trailerData';
 
-
-const ChannelPage = () => {
+const ChannelPage = ({ url }) => {
 
     const dispatch = useDispatch();
+    const webLogo = useSelector((state) => state.logoDetails.value);
     const detailsShower = useSelector((state) => state.showDetails.value);
     const showState = useSelector((state) => state.show.value);
     const showId = useSelector((state) => state.findId.value);
 
     const [search, setSearch] = useState('');
     const [show, setShow] = useState([]);
+    const [imgSrc, setImgSrc] = useState([
+        netflix, disney, hbo, prime, apple
+    ]);
+    const [videoURL, setVideoURL] =
+        useState([netflixTrailers, disneyTrailers]);
+
+    let imgIdx = '';
+
+
 
 
     const getSeries = async (query) => {
@@ -49,6 +65,9 @@ const ChannelPage = () => {
     useEffect(() => {
         getSeries(showState);
 
+        console.log(videoURL[webLogo][0].src);
+
+
     }, [])
 
 
@@ -60,11 +79,11 @@ const ChannelPage = () => {
 
         <Main>
             <LogoWrapper>
-                <Logo />
+                <Logo src={imgSrc[webLogo]} />
             </LogoWrapper>
 
             <Wrapper>
-                <MovieTrailer />
+                <MovieTrailer url={[videoURL[webLogo][0].src, videoURL[webLogo][1].src, videoURL[webLogo][2].src]} />
                 <Form onSubmit={handleSearch}>
                     <input type='search' value={search}
                         placeholder='search for the show'
@@ -106,7 +125,7 @@ justify-content: center;
 const Logo = styled.img`
 width:300px;
 height:150px;
-border:1px solid #fff;
+/* border:1px solid #fff; */
 
 `;
 const Wrapper = styled.div`

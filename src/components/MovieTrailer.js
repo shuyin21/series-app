@@ -1,26 +1,24 @@
 import { useState } from 'react';
 import ReactPlayer from 'react-player';
 import movieTrailer from 'movie-trailer';
-
+import { netflixTrailers } from './trailerData';
 import styled from 'styled-components';
 
-const MovieTrailer = () => {
+const MovieTrailer = (props) => {
     //Setting up the initial states using
     // react hook 'useState"
     const [playingState, setPlayingState] = useState({ playing: false });
     const [video, setVideo] = useState("inception");
-    const [videoURL, setVideoURL] =
-        useState([{ src: 'https://youtu.be/6Jg_rkKtJgo' }, { src: "https://youtu.be/ZTI6T5M8Fj0" }, { src: 'https://youtu.be/Jtdh0Tkqfdw' }
-        ]);
+
 
     //A function to fetch the required URL
     // and storing it inside the
     // videoURL state variable
-    function handleSearch() {
-        movieTrailer(video).then((res) => {
-            setVideoURL(res);
-        });
-    }
+    // function handleSearch() {
+    //     movieTrailer(video).then((res) => {
+    //         setVideoURL(res);
+    //     });
+    // }
 
     return (
         <App>
@@ -36,10 +34,9 @@ const MovieTrailer = () => {
                 </Button>
             </SearchBox> */}
 
-      // Using 'ReactPlayer' component to
-            // display the video
+
             <ReactPlayerBox
-                url={[videoURL[0].src, videoURL[1].src, videoURL[2].src]}
+                url={props.url}
                 playing
                 muted
                 width="100%"

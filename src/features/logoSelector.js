@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialStateValue = 'netflix';
+const initialStateValue = 0;
 
 export const logoSlice = createSlice({
-    name: 'showDetails',
+    name: 'logoDetails',
     initialState: { value: initialStateValue },
 
     reducers: {

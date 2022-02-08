@@ -7,31 +7,24 @@ import BannerComp from '../components/Banner';
 import Footer from '../components/Footer';
 
 import { posterData } from '../components/imageData';
-import { useDispatch } from 'react-redux';
-import { logoDetails } from '../features/logoSelector';
+
 
 import ChannelCard from '../components/ChannelCard';
-import Disney from '../Images/disney+.png';
+import Disney from '../Images/disney.png';
 import Netflix from '../Images/netflix.png';
-import PrimeV from '../Images/primeV.png';
-import HboMax from '../Images/hboLogo.png';
-import appleTv from '../Images/appleTv2.png';
+import PrimeV from '../Images/prime.png';
+import HboMax from '../Images/hbo.png';
+import appleTv from '../Images/apple.png';
 import SidePanel from '../components/SidePanel';
 
 const Homepage = () => {
 
-    const dispatch = useDispatch();
+
 
 
 
     console.log(posterData[0].image);
 
-    const logoHandler = (e) => {
-        e.preventDefault();
-        dispatch(logoDetails(e.target.value));
-        console.log('working');
-
-    }
 
 
     return (
@@ -48,17 +41,17 @@ const Homepage = () => {
 
 
                     <CardWrapper>
-                        <ChannelCard onClick={logoHandler} image={Disney} linkTo='' value='disney' />
-                        <ChannelCard image={HboMax} linkTo='details' />
+                        <ChannelCard image={Disney} linkTo='channel' value='1' />
+                        <ChannelCard image={HboMax} linkTo='channel' value='2' />
 
 
                     </CardWrapper>
 
-                    <ChannelCard image={Netflix} linkTo='details' />
+                    <ChannelCard image={Netflix} linkTo='channel' value='0' />
 
                     <CardWrapper>
-                        <ChannelCard image={PrimeV} linkTo='details' />
-                        <ChannelCard image={appleTv} linkTo='details' />
+                        <ChannelCard image={PrimeV} linkTo='channel' value='3' />
+                        <ChannelCard image={appleTv} linkTo='channel' value='4' />
 
                     </CardWrapper>
 
