@@ -13,7 +13,7 @@ import disney from '../Images/disney.png';
 import hbo from '../Images/hbo.png';
 import prime from '../Images/prime.png';
 import apple from '../Images/apple.png';
-import { disneyTrailers, netflixTrailers } from '../components/trailerData';
+import { appleTrailers, disneyTrailers, hboTrailers, netflixTrailers, primeTrailers } from '../components/trailerData';
 
 const ChannelPage = ({ url }) => {
 
@@ -29,7 +29,7 @@ const ChannelPage = ({ url }) => {
         netflix, disney, hbo, prime, apple
     ]);
     const [videoURL, setVideoURL] =
-        useState([netflixTrailers, disneyTrailers]);
+        useState([netflixTrailers, disneyTrailers, hboTrailers, primeTrailers, appleTrailers]);
 
     let imgIdx = '';
 
@@ -78,12 +78,13 @@ const ChannelPage = ({ url }) => {
     return (
 
         <Main>
+            <MovieTrailer url={[videoURL[webLogo][0].src, videoURL[webLogo][1].src, videoURL[webLogo][2].src, videoURL[webLogo][3].src]} />
             <LogoWrapper>
                 <Logo src={imgSrc[webLogo]} />
             </LogoWrapper>
 
             <Wrapper>
-                <MovieTrailer url={[videoURL[webLogo][0].src, videoURL[webLogo][1].src, videoURL[webLogo][2].src]} />
+
                 <Form onSubmit={handleSearch}>
                     <input type='search' value={search}
                         placeholder='search for the show'
@@ -113,6 +114,7 @@ width: 100vw;
 height:100%;
 display: flex;
 flex-direction: column;
+align-items: center;
 
 `;
 const LogoWrapper = styled.div`
@@ -126,6 +128,10 @@ const Logo = styled.img`
 width:300px;
 height:150px;
 /* border:1px solid #fff; */
+@media screen and (max-width:768px){
+    width:200px;
+    height:90px;
+}
 
 `;
 const Wrapper = styled.div`

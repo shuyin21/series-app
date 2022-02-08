@@ -63,15 +63,19 @@ display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    height: 400px;
-    width: 100%;
+    height: 200px;
+    width: 30%;
     font-size: 22px;
 
 
     @media screen and (max-width:768px){
     padding:0;
-    width:400px;
-    height:300px;
+    width:60%;
+    height:200px;
+}
+@media screen and (max-width:500px){
+width:80%;
+height:150px;
 }
 `;
 
