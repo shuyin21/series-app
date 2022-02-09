@@ -18,7 +18,7 @@ import WebCard from '../components/WebCard';
 
 
 const valami = [];
-
+const netflixState = [];
 const ChannelPage = ({ url }) => {
 
     const dispatch = useDispatch();
@@ -79,18 +79,49 @@ const ChannelPage = ({ url }) => {
     const netflixSearch = () => {
 
 
-        webData.map(x => valami.push({ name: x._embedded.show.webChannel, id: x.id }));
+        webData.map(x => {
+            valami.push({
+                name: x._embedded.show.name, web: x._embedded.show.webChannel ? x._embedded.show.webChannel.name :
+                    'not exist', id: x.id
+            })
+        })
+
+    };
+    const [netflixHolder, setNetflixHolder] = useState([]);
+
+    const netflixCheck = () => {
+        const holder = valami.reduce(function (newArr, item) {
+            if (item.web === 'Netflix') {
+                newArr.push(item.name);
+
+
+            }
+            return newArr;
+        }, []);
+        const uni = uniqueArray1(holder);
+        setNetflixHolder(uni);
 
     }
+
+
+
     const check = () => {
+
+
         console.log(valami);
+
+
+
+
+        console.log(netflixHolder);
     }
+
     useEffect(() => {
         // getSeries(showState);
         getSeries(search);
         console.log(videoURL[webLogo][0].src);
         getWebSeries();
-
+        netflixSearch();
     }, [])
 
 
@@ -100,7 +131,20 @@ const ChannelPage = ({ url }) => {
         setSearch(e.target.value);
 
     }
-    // console.log(show[1].show.image.medium);
+
+    function uniqueArray1(ar) {
+
+        var j = {};
+        ar.forEach(function (v) {
+            j[v + '::' + typeof v] = v;
+        });
+
+        return Object.keys(j).map(function (v) {
+            return j[v];
+        });
+
+    }
+
     return (
 
         <Main>
@@ -121,6 +165,8 @@ const ChannelPage = ({ url }) => {
 
                 <button onClick={netflixSearch}>testButton</button>
                 <button onClick={check}>check</button>
+                <button onClick={netflixCheck}>netflix</button>
+                {/* <button onClick={unique(netflixHolder)}>netflix</button> */}
             </Wrapper>
 
             <HomeWrapper>
