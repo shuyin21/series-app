@@ -16,6 +16,9 @@ import apple from '../Images/apple.png';
 import { appleTrailers, disneyTrailers, hboTrailers, netflixTrailers, primeTrailers } from '../data/trailerData';
 import WebCard from '../components/WebCard';
 
+
+const valami = [];
+
 const ChannelPage = ({ url }) => {
 
     const dispatch = useDispatch();
@@ -24,7 +27,7 @@ const ChannelPage = ({ url }) => {
     const showState = useSelector((state) => state.show.value);
     const showId = useSelector((state) => state.findId.value);
 
-    const [search, setSearch] = useState('game');
+    const [search, setSearch] = useState('archive');
     const [show, setShow] = useState([]);
     const [imgSrc, setImgSrc] = useState([
         netflix, disney, hbo, prime, apple
@@ -32,9 +35,11 @@ const ChannelPage = ({ url }) => {
     const [videoURL, setVideoURL] =
         useState([netflixTrailers, disneyTrailers, hboTrailers, primeTrailers, appleTrailers]);
 
+
+    const [webData, setWebData] = useState([]);
     let imgIdx = '';
 
-
+    const [test, setTest] = useState([]);
 
 
     const getSeries = async (query) => {
@@ -52,7 +57,16 @@ const ChannelPage = ({ url }) => {
 
     }
 
+    const getWebSeries = async () => {
+        const url = ' https://api.tvmaze.com/schedule/full'
+        await fetch(url)
+            .then((res) => res.text())
+            .then((text) => text.length ? JSON.parse(text) : {})
+            .then(data => { console.log(data); setWebData(data) }) //api data will be visible in your browser console. 
+            .then()
+            .catch(err => console.warn("ERROR", err));
 
+    }
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -62,14 +76,24 @@ const ChannelPage = ({ url }) => {
         dispatch(showDetails(false));
         setSearch('');
     }
+    const netflixSearch = () => {
 
+
+        webData.map(x => valami.push({ name: x._embedded.show.webChannel, id: x.id }));
+
+    }
+    const check = () => {
+        console.log(valami);
+    }
     useEffect(() => {
         // getSeries(showState);
         getSeries(search);
         console.log(videoURL[webLogo][0].src);
-
+        getWebSeries();
 
     }, [])
+
+
 
 
     const handleShowSearch = (e) => {
@@ -94,14 +118,27 @@ const ChannelPage = ({ url }) => {
                         onChange={handleShowSearch}
                     />
                 </Form>
+
+                <button onClick={netflixSearch}>testButton</button>
+                <button onClick={check}>check</button>
             </Wrapper>
-            <WebCard />
+
             <HomeWrapper>
-                {show.map(series => (
+
+
+                {/* {show.map(series => (
+
+
                     <WebCard key={series.show.id} showName={series.show.name} img={series.show.image} />
+                ))} */}
+                {/* {
+                    webData.map((data) => (
+                        data._embedded.show.webChannel ? <h3 key={data.id}>{data._embedded.show.webChannel}</h3> : <></>
 
-                ))}
+                    )
 
+                    )
+                } */}
             </HomeWrapper>
         </Main>
 

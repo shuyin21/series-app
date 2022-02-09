@@ -39,9 +39,9 @@ export default WebCard;
 
 const Main = styled.div`
 width:200px;
-height:250px;
+height:300px;
 display: flex;
-border:1px solid white;
+/* border:1px solid white; */
 border-radius: 15px;
 margin:10px;
 
@@ -72,7 +72,7 @@ height:90%;
 const Linker = styled(Link)`
 
 width:200px;
-height:250px;
+height:300px;
 
 
 
@@ -83,7 +83,7 @@ height:40px;
 display: flex;
 align-items: center;
 justify-content: center;
-
+text-align: center;
 border-radius: 15px;
 h3{
    
