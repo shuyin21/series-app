@@ -6,6 +6,7 @@ import ShowCard from '../components/ShowCard';
 import { useSelector, useDispatch } from 'react-redux';
 import { findShow } from '../features/showFinder';
 import { showDetails } from '../features/showDetails';
+import { netflixDetails } from '../features/netflixReducer';
 import { showLogo } from '../features/logoSelector';
 import ShowcaseBlock from '../components/ShowcaseBlock';
 import netflix from '../Images/netflix.png';
@@ -23,9 +24,8 @@ const ChannelPage = ({ url }) => {
 
     const dispatch = useDispatch();
     const webLogo = useSelector((state) => state.logoDetails.value);
-    const detailsShower = useSelector((state) => state.showDetails.value);
-    const showState = useSelector((state) => state.show.value);
-    const showId = useSelector((state) => state.findId.value);
+    const netflixShows = useSelector((state) => state.netflixShows.value);
+
 
     const [search, setSearch] = useState('archive');
     const [show, setShow] = useState([]);
@@ -37,9 +37,8 @@ const ChannelPage = ({ url }) => {
 
 
     const [webData, setWebData] = useState([]);
-    let imgIdx = '';
 
-    const [test, setTest] = useState([]);
+
 
 
     const getSeries = async (query) => {
@@ -57,13 +56,29 @@ const ChannelPage = ({ url }) => {
 
     }
 
+    const getTvShow = async (query) => {
+        const url = `https://api.tvmaze.com/shows/${query}`
+        await fetch(url)
+
+
+            .then((res) => res.text())
+            .then((text) => text.length ? JSON.parse(text) : {})
+            .then(data => { netflixState.push(data) }) //api data will be visible in your browser console. 
+
+            .catch(err => console.warn("ERROR", err));
+
+    }
+
+
+
+
     const getWebSeries = async () => {
         const url = ' https://api.tvmaze.com/schedule/full'
         await fetch(url)
             .then((res) => res.text())
             .then((text) => text.length ? JSON.parse(text) : {})
-            .then(data => { console.log(data); setWebData(data) }) //api data will be visible in your browser console. 
-            .then()
+            .then(data => { console.log(data); setWebData(data); }) //api data will be visible in your browser console. 
+
             .catch(err => console.warn("ERROR", err));
 
     }
@@ -76,53 +91,43 @@ const ChannelPage = ({ url }) => {
         dispatch(showDetails(false));
         setSearch('');
     }
-    const netflixSearch = () => {
 
-
+    const bestFunction = () => {
+        const holder = [];
+        const flixHolder = [];
         webData.map(x => {
-            valami.push({
+            holder.push({
                 name: x._embedded.show.name, web: x._embedded.show.webChannel ? x._embedded.show.webChannel.name :
-                    'not exist', id: x.id
+                    'not exist', id: x._embedded.show.id
             })
-        })
-
-    };
-    const [netflixHolder, setNetflixHolder] = useState([]);
-
-    const netflixCheck = () => {
-        const holder = valami.reduce(function (newArr, item) {
+        });
+        const reducer = holder.reduce(function (newArr, item) {
             if (item.web === 'Netflix') {
-                newArr.push(item.name);
+                newArr.push([item.id]);
 
 
             }
             return newArr;
         }, []);
-        const uni = uniqueArray1(holder);
-        setNetflixHolder(uni);
 
+        const uni = uniqueArray1(reducer);
+        // netflixState.push(uni);
+
+        uni.map(x => getTvShow(x));
+
+        setTimeout(() => { console.log(netflixState); }, 2000);
+        setTimeout(() => { dispatch(netflixDetails(netflixState)); }, 2000);
     }
 
-
-
-    const check = () => {
-
-
-        console.log(valami);
-
-
-
-
-        console.log(netflixHolder);
-    }
 
     useEffect(() => {
         // getSeries(showState);
         getSeries(search);
         console.log(videoURL[webLogo][0].src);
         getWebSeries();
-        netflixSearch();
+
     }, [])
+
 
 
 
@@ -144,6 +149,9 @@ const ChannelPage = ({ url }) => {
         });
 
     }
+    const reduxValue = () => {
+        console.log(netflixShows);
+    }
 
     return (
 
@@ -163,15 +171,20 @@ const ChannelPage = ({ url }) => {
                     />
                 </Form>
 
-                <button onClick={netflixSearch}>testButton</button>
-                <button onClick={check}>check</button>
-                <button onClick={netflixCheck}>netflix</button>
+
+                <button onClick={bestFunction}>best</button>
+                <button onClick={reduxValue}>show redux</button>
+
                 {/* <button onClick={unique(netflixHolder)}>netflix</button> */}
             </Wrapper>
 
             <HomeWrapper>
 
+                {netflixShows.map(item =>
 
+
+                    <WebCard key={item.id} showName={item.name} img={item.image} />
+                )}
                 {/* {show.map(series => (
 
 
