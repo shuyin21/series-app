@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import MovieTrailer from '../components/MovieTrailer';
 import ShowCard from '../components/ShowCard';
-
+import Spinner from '../components/Spinner';
 import { useSelector, useDispatch } from 'react-redux';
 import { findShow } from '../features/showFinder';
 import { showDetails } from '../features/showDetails';
@@ -16,10 +16,10 @@ import prime from '../Images/prime.png';
 import apple from '../Images/apple.png';
 import { appleTrailers, disneyTrailers, hboTrailers, netflixTrailers, primeTrailers } from '../data/trailerData';
 import WebCard from '../components/WebCard';
+import { getTvShow, netflixState } from '../components/Fetching';
 
 
-const valami = [];
-const netflixState = [];
+
 const ChannelPage = ({ url }) => {
 
     const dispatch = useDispatch();
@@ -36,7 +36,7 @@ const ChannelPage = ({ url }) => {
         useState([netflixTrailers, disneyTrailers, hboTrailers, primeTrailers, appleTrailers]);
 
 
-    const [webData, setWebData] = useState([]);
+
 
 
 
@@ -56,32 +56,7 @@ const ChannelPage = ({ url }) => {
 
     }
 
-    const getTvShow = async (query) => {
-        const url = `https://api.tvmaze.com/shows/${query}`
-        await fetch(url)
 
-
-            .then((res) => res.text())
-            .then((text) => text.length ? JSON.parse(text) : {})
-            .then(data => { netflixState.push(data) }) //api data will be visible in your browser console. 
-
-            .catch(err => console.warn("ERROR", err));
-
-    }
-
-
-
-
-    const getWebSeries = async () => {
-        const url = ' https://api.tvmaze.com/schedule/full'
-        await fetch(url)
-            .then((res) => res.text())
-            .then((text) => text.length ? JSON.parse(text) : {})
-            .then(data => { console.log(data); setWebData(data); }) //api data will be visible in your browser console. 
-
-            .catch(err => console.warn("ERROR", err));
-
-    }
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -92,39 +67,13 @@ const ChannelPage = ({ url }) => {
         setSearch('');
     }
 
-    const bestFunction = () => {
-        const holder = [];
-        const flixHolder = [];
-        webData.map(x => {
-            holder.push({
-                name: x._embedded.show.name, web: x._embedded.show.webChannel ? x._embedded.show.webChannel.name :
-                    'not exist', id: x._embedded.show.id
-            })
-        });
-        const reducer = holder.reduce(function (newArr, item) {
-            if (item.web === 'Netflix') {
-                newArr.push([item.id]);
-
-
-            }
-            return newArr;
-        }, []);
-
-        const uni = uniqueArray1(reducer);
-        // netflixState.push(uni);
-
-        uni.map(x => getTvShow(x));
-
-        setTimeout(() => { console.log(netflixState); }, 2000);
-        setTimeout(() => { dispatch(netflixDetails(netflixState)); }, 2000);
-    }
-
 
     useEffect(() => {
+        getWebSeries();
         // getSeries(showState);
         getSeries(search);
-        console.log(videoURL[webLogo][0].src);
-        getWebSeries();
+
+
 
     }, [])
 
@@ -137,6 +86,53 @@ const ChannelPage = ({ url }) => {
 
     }
 
+
+    const reduxValue = () => {
+        console.log(netflixShows);
+    }
+
+
+    const getWebSeries = async () => {
+        const url = ' https://api.tvmaze.com/schedule/full';
+
+        const holder = [];
+
+        await fetch(url)
+            .then((res) => res.text())
+            .then((text) => text.length ? JSON.parse(text) : {})
+            .then(data => {
+                data.map(x => {
+                    holder.push({
+                        name: x._embedded.show.name, web: x._embedded.show.webChannel ? x._embedded.show.webChannel.name :
+                            'not exist', id: x._embedded.show.id
+                    })
+                });
+                const reducer = holder.reduce(function (newArr, item) {
+                    if (item.web === 'Netflix') {
+                        newArr.push([item.id]);
+
+
+                    }
+                    return newArr;
+                }, []);
+
+                const uni = uniqueArray1(reducer);
+
+
+                uni.map(x => getTvShow(x));
+
+                console.log(netflixState);
+                setTimeout(() => { dispatch(netflixDetails(netflixState)); }, 2000);
+
+
+            })
+
+            .catch(err => console.warn("ERROR", err));
+
+
+
+
+    }
     function uniqueArray1(ar) {
 
         var j = {};
@@ -149,48 +145,48 @@ const ChannelPage = ({ url }) => {
         });
 
     }
-    const reduxValue = () => {
-        console.log(netflixShows);
-    }
+
+
 
     return (
+        <Suspense fallback={<Spinner />}>
 
-        <Main>
-            <MovieTrailer url={[videoURL[webLogo][0].src, videoURL[webLogo][1].src, videoURL[webLogo][2].src, videoURL[webLogo][3].src]} />
-            <LogoWrapper>
-                <Logo src={imgSrc[webLogo]} />
-            </LogoWrapper>
+            <Main>
+                <MovieTrailer url={[videoURL[webLogo][0].src, videoURL[webLogo][1].src, videoURL[webLogo][2].src, videoURL[webLogo][3].src]} />
+                <LogoWrapper>
+                    <Logo src={imgSrc[webLogo]} />
+                </LogoWrapper>
 
-            <Wrapper>
+                <Wrapper>
 
-                <Form onSubmit={handleSearch}>
-                    <input type='search' value={search}
-                        placeholder='search for the show'
-                        required
-                        onChange={handleShowSearch}
-                    />
-                </Form>
-
-
-                <button onClick={bestFunction}>best</button>
-                <button onClick={reduxValue}>show redux</button>
-
-                {/* <button onClick={unique(netflixHolder)}>netflix</button> */}
-            </Wrapper>
-
-            <HomeWrapper>
-
-                {netflixShows.map(item =>
+                    <Form onSubmit={handleSearch}>
+                        <input type='search' value={search}
+                            placeholder='search for the show'
+                            required
+                            onChange={handleShowSearch}
+                        />
+                    </Form>
 
 
-                    <WebCard key={item.id} showName={item.name} img={item.image} />
-                )}
-                {/* {show.map(series => (
+
+                    <button onClick={reduxValue}>show redux</button>
+
+                    {/* <button onClick={unique(netflixHolder)}>netflix</button> */}
+                </Wrapper>
+
+                <HomeWrapper>
+
+                    {netflixShows.map(item =>
+
+
+                        <WebCard key={item.id} showName={item.name} img={item.image} />
+                    )}
+                    {/* {show.map(series => (
 
 
                     <WebCard key={series.show.id} showName={series.show.name} img={series.show.image} />
                 ))} */}
-                {/* {
+                    {/* {
                     webData.map((data) => (
                         data._embedded.show.webChannel ? <h3 key={data.id}>{data._embedded.show.webChannel}</h3> : <></>
 
@@ -198,9 +194,13 @@ const ChannelPage = ({ url }) => {
 
                     )
                 } */}
-            </HomeWrapper>
-        </Main>
+                </HomeWrapper>
+            </Main>
 
+
+
+
+        </Suspense>
 
     );
 };

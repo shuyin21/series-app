@@ -18,6 +18,7 @@ const WebCard = (props) => {
                 <Linker to='detail'>
                     <Title>
                         <h3>{props.showName}</h3>
+
                     </Title>
                     {
 
