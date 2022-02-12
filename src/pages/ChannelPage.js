@@ -176,11 +176,11 @@ const ChannelPage = ({ url }) => {
 
                 <HomeWrapper>
 
-                    {netflixShows.map(item =>
+                    {/* {netflixShows.map(item =>
 
 
                         <WebCard key={item.id} showName={item.name} img={item.image} />
-                    )}
+                    )} */}
                     {/* {show.map(series => (
 
 
