@@ -181,11 +181,11 @@ const ChannelPage = ({ url }) => {
 
                         <WebCard key={item.id} showName={item.name} img={item.image} />
                     )} */}
-                    {/* {show.map(series => (
+                    {show.map(series => (
 
 
-                    <WebCard key={series.show.id} showName={series.show.name} img={series.show.image} />
-                ))} */}
+                        <WebCard key={series.show.id} showName={series.show.name} img={series.show.image} />
+                    ))}
                     {/* {
                     webData.map((data) => (
                         data._embedded.show.webChannel ? <h3 key={data.id}>{data._embedded.show.webChannel}</h3> : <></>
