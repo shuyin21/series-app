@@ -1,4 +1,6 @@
 
+
+
 export const netflixState = [];
 
 export const getTvShow = async (query) => {
@@ -13,6 +15,5 @@ export const getTvShow = async (query) => {
         .catch(err => console.warn("ERROR", err));
 
 };
-
 
 
