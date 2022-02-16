@@ -2,18 +2,40 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { getTvShow, netflixState } from './Fetching';
 import { netflixDetails } from '../features/netflixReducer';
+import WebCard from '../components/WebCard';
+import Spinner from './Spinner';
 
 const FetchingComponent = () => {
 
-
+    const [channelName, setChannelName] = useState('valami');
 
     const dispatch = useDispatch();
     const netflixShows = useSelector((state) => state.netflixShows.value);
+    const channel = useSelector((state) => state.logoDetails.value);
+
+    useEffect(() => {
+
+        getWebSeries();
+    }, []);
+
+
+    console.log(channel);
+
+
+
+    console.log(channelName);
 
     const getWebSeries = async () => {
         const url = ' https://api.tvmaze.com/schedule/full';
 
         const holder = [];
+
+        if (channel === 0) {
+            setChannelName('Netflix')
+        }
+        else if (channel === 1) {
+            setChannelName('Disney+');
+        }
 
         await fetch(url)
             .then((res) => res.text())
@@ -64,8 +86,19 @@ const FetchingComponent = () => {
         });
 
     }
+    if (netflixShows < 1) {
+        return <Spinner />
+    }
     return (
-        <h1>FETCHING COMPONENT</h1>
+        <>
+            {
+                netflixShows.map(item =>
+
+
+                    <WebCard key={item.id} showName={item.name} img={item.image} />
+                )
+            }
+        </>
     )
 }
 
