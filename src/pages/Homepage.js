@@ -32,18 +32,7 @@ const Homepage = () => {
     }, [])
 
     console.log(posterData[0].image);
-    // const getTvShow = async (query) => {
-    //     const url = `https://api.tvmaze.com/shows/${query}`
-    //     await fetch(url)
 
-
-    //         .then((res) => res.text())
-    //         .then((text) => text.length ? JSON.parse(text) : {})
-    //         .then(data => { netflixState.push(data) }) //api data will be visible in your browser console. 
-
-    //         .catch(err => console.warn("ERROR", err));
-
-    // }
     // const getWebSeries = async () => {
     //     const url = ' https://api.tvmaze.com/schedule/full';
 
@@ -102,8 +91,8 @@ const Homepage = () => {
 
 
                     <CardWrapper>
-                        <ChannelCard image={Disney} linkTo='channel' value='1' />
-                        <ChannelCard image={HboMax} linkTo='channel' value='2' />
+                        <ChannelCard image={Disney} linkTo='channel' value='1' channel='Disney+' />
+                        <ChannelCard image={HboMax} linkTo='channel' value='2' channel='HBO Max' />
 
 
                     </CardWrapper>

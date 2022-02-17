@@ -3,20 +3,22 @@ import styled from 'styled-components';
 import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { logoDetails } from '../features/logoSelector';
-const ChannelCard = ({ image, linkTo, value }) => {
+import { channelDetails } from '../features/channel';
+const ChannelCard = ({ image, linkTo, value, channel }) => {
 
     const dispatch = useDispatch();
 
     const logoHandler = (e) => {
         e.preventDefault();
         dispatch(logoDetails(value));
+        dispatch(channelDetails(channel));
         console.log('working');
 
     }
 
 
     return (
-        <Container onClick={logoHandler}>
+        <Container onClick={logoHandler} >
 
             <Content>
 

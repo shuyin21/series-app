@@ -6,6 +6,7 @@ import idFinderReducer from './idFinder';
 import detailsReducer from './showDetails';
 import logoReducer from './logoSelector';
 import netflixReducer from './netflixReducer';
+import channelReducer from './channel';
 
 const allReducers = combineReducers({
 
@@ -15,6 +16,7 @@ const allReducers = combineReducers({
     findId: idFinderReducer,
     showDetails: detailsReducer,
     logoDetails: logoReducer,
+    channelDetails: channelReducer,
 
 
 });

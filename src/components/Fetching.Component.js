@@ -7,21 +7,66 @@ import Spinner from './Spinner';
 
 const FetchingComponent = () => {
 
-    const [channelName, setChannelName] = useState('valami');
+
 
     const dispatch = useDispatch();
     const netflixShows = useSelector((state) => state.netflixShows.value);
-    const channel = useSelector((state) => state.logoDetails.value);
+    const channel = useSelector((state) => state.channelDetails.value);
+
+    const [channelName, setChannelName] = useState(channel);
 
     useEffect(() => {
+        // if (channel == channelName) {
+        //     return channelName;
+        // }
+        // else { setChannelName(channel) };
 
         getWebSeries();
-    }, []);
+
+
+    });
 
 
     console.log(channel);
 
+    const channelChecker = () => {
+        if (channel == 0) {
+            return setChannelName('Netflix');
+        }
+        else if (channel == 2) {
+            return 'HBO Max'
+        }
+        else if (channel == 1) {
+            return 'Disney+'
+        } else if (channel == 3) {
+            return 'Prime Video'
+        }
+        else if (channel == 4) {
+            return 'Apple Tv+'
+        }
 
+        // switch (channel) {
+        //     case '0':
+        //         return 'Netflix';
+        //         break;
+        //     case '1':
+        //         return 'Disney+';
+        //         break;
+        //     case '2':
+        //         return 'HBO Max';
+        //         break;
+        //     case '3':
+        //         return 'Prime Video';
+        //         break;
+        //     case '4':
+        //         return 'Apple TV+';
+        //         break;
+        //     default:
+        //         return channelName;
+        //         break;
+        // }
+
+    }
 
     console.log(channelName);
 
@@ -30,12 +75,7 @@ const FetchingComponent = () => {
 
         const holder = [];
 
-        if (channel === 0) {
-            setChannelName('Netflix')
-        }
-        else if (channel === 1) {
-            setChannelName('Disney+');
-        }
+
 
         await fetch(url)
             .then((res) => res.text())
@@ -47,8 +87,9 @@ const FetchingComponent = () => {
                             'not exist', id: x._embedded.show.id
                     })
                 });
+                console.log(channelName);
                 const reducer = holder.reduce(function (newArr, item) {
-                    if (item.web === 'Netflix') {
+                    if (item.web == channelName) {
                         newArr.push([item.id]);
 
 
