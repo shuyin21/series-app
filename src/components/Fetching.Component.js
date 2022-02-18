@@ -13,13 +13,10 @@ const FetchingComponent = () => {
     const netflixShows = useSelector((state) => state.netflixShows.value);
     const channel = useSelector((state) => state.channelDetails.value);
 
-    const [channelName, setChannelName] = useState(channel);
+    const [channelName, setChannelName] = useState();
 
     useEffect(() => {
-        // if (channel == channelName) {
-        //     return channelName;
-        // }
-        // else { setChannelName(channel) };
+        channelChecker();
 
         getWebSeries();
 
@@ -27,7 +24,6 @@ const FetchingComponent = () => {
     });
 
 
-    console.log(channel);
 
     const channelChecker = () => {
         if (channel == 0) {
