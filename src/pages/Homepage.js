@@ -25,55 +25,8 @@ import SidePanel from '../components/SidePanel';
 const Homepage = () => {
 
 
-    const [webData, setWebData] = useState([]);
-    useEffect(() => {
-        // getWebSeries();
-        // setTimeout(() => { bestFunction() }, 3000)
-    }, [])
-
-    console.log(posterData[0].image);
-
-    // const getWebSeries = async () => {
-    //     const url = ' https://api.tvmaze.com/schedule/full';
-
-    //     const holder = [];
-
-    //     await fetch(url)
-    //         .then((res) => res.text())
-    //         .then((text) => text.length ? JSON.parse(text) : {})
-    //         .then(data => {
-    //             data.map(x => {
-    //                 holder.push({
-    //                     name: x._embedded.show.name, web: x._embedded.show.webChannel ? x._embedded.show.webChannel.name :
-    //                         'not exist', id: x._embedded.show.id
-    //                 })
-    //             });
-    //             const reducer = holder.reduce(function (newArr, item) {
-    //                 if (item.web === 'Netflix') {
-    //                     newArr.push([item.id]);
 
 
-    //                 }
-    //                 return newArr;
-    //             }, []);
-
-    //             const uni = uniqueArray1(reducer);
-
-
-    //             uni.map(x => getTvShow(x));
-
-    //             console.log(netflixState);
-    //             setTimeout(() => { dispatch(netflixDetails(netflixState)); }, 2000);
-
-
-    //         }) 
-
-    //         .catch(err => console.warn("ERROR", err));
-
-
-
-
-    // }
 
 
 

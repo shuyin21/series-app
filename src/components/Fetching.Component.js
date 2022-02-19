@@ -23,8 +23,6 @@ const FetchingComponent = () => {
 
     });
 
-
-
     const channelChecker = () => {
         if (channel == 0) {
             return setChannelName('Netflix');
@@ -41,26 +39,7 @@ const FetchingComponent = () => {
             return 'Apple Tv+'
         }
 
-        // switch (channel) {
-        //     case '0':
-        //         return 'Netflix';
-        //         break;
-        //     case '1':
-        //         return 'Disney+';
-        //         break;
-        //     case '2':
-        //         return 'HBO Max';
-        //         break;
-        //     case '3':
-        //         return 'Prime Video';
-        //         break;
-        //     case '4':
-        //         return 'Apple TV+';
-        //         break;
-        //     default:
-        //         return channelName;
-        //         break;
-        // }
+
 
     }
 
