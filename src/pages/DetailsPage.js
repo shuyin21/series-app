@@ -56,7 +56,7 @@ const Details = (props) => {
     const handleDetailClose = () => {
         dispatch(showDetails(false));
     }
-    // console.log(details);
+
     return (
         <DetailMain>
             <Wrapper>

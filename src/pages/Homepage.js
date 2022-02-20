@@ -10,7 +10,7 @@ import { posterData } from '../data/imageData';
 
 
 
-import { useSelector, useDispatch } from 'react-redux';
+
 import ChannelCard from '../components/ChannelCard';
 import Disney from '../Images/disney.png';
 import Netflix from '../Images/netflix.png';
