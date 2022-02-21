@@ -50,11 +50,11 @@ const Homepage = () => {
 
                     </CardWrapper>
 
-                    <ChannelCard image={Netflix} linkTo='channel' value='0' />
+                    <ChannelCard image={Netflix} linkTo='channel' value='0' channel='Netflix' />
 
                     <CardWrapper>
-                        <ChannelCard image={PrimeV} linkTo='channel' value='3' />
-                        <ChannelCard image={appleTv} linkTo='channel' value='4' />
+                        <ChannelCard image={PrimeV} linkTo='channel' value='3' channel='Prime Video' />
+                        <ChannelCard image={appleTv} linkTo='channel' value='4' channel='Apple TV+' />
 
                     </CardWrapper>
 

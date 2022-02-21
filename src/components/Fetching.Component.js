@@ -5,45 +5,48 @@ import { netflixDetails } from '../features/netflixReducer';
 import WebCard from '../components/WebCard';
 import Spinner from './Spinner';
 
-const FetchingComponent = () => {
+const FetchingComponent = (props) => {
 
 
 
     const dispatch = useDispatch();
     const netflixShows = useSelector((state) => state.netflixShows.value);
-    const channel = useSelector((state) => state.channelDetails.value);
+
 
     const [channelName, setChannelName] = useState();
 
     useEffect(() => {
-        channelChecker();
+
+        console.log(props.channelName);
 
         getWebSeries();
 
 
-    });
-
-    const channelChecker = () => {
-        if (channel == 0) {
-            return setChannelName('Netflix');
-        }
-        else if (channel == 2) {
-            return 'HBO Max'
-        }
-        else if (channel == 1) {
-            return 'Disney+'
-        } else if (channel == 3) {
-            return 'Prime Video'
-        }
-        else if (channel == 4) {
-            return 'Apple Tv+'
-        }
+    }, [channelName]);
 
 
 
-    }
+    // const channelChecker = () => {
+    //     if (channel == 0) {
+    //         setChannelName('Netflix');
+    //     }
+    //     else if (channel == 2) {
+    //         setChannelName('HBO Max')
+    //     }
+    //     else if (channel == 1) {
+    //         setChannelName('Disney+')
+    //     } else if (channel == 3) {
+    //         setChannelName('Prime Video')
+    //     }
+    //     else if (channel == 4) {
+    //         setChannelName('Apple TV+')
+    //     }
 
-    console.log(channelName);
+
+
+    // }
+
+
 
     const getWebSeries = async () => {
         const url = ' https://api.tvmaze.com/schedule/full';
@@ -51,6 +54,7 @@ const FetchingComponent = () => {
         const holder = [];
 
 
+        // channelChecker();
 
         await fetch(url)
             .then((res) => res.text())
@@ -62,9 +66,9 @@ const FetchingComponent = () => {
                             'not exist', id: x._embedded.show.id
                     })
                 });
-                console.log(channelName);
+
                 const reducer = holder.reduce(function (newArr, item) {
-                    if (item.web == channelName) {
+                    if (item.web == props.channelName) {
                         newArr.push([item.id]);
 
 
@@ -79,7 +83,6 @@ const FetchingComponent = () => {
 
                 console.log(netflixState);
                 setTimeout(() => { dispatch(netflixDetails(netflixState)); }, 2000);
-
 
             })
 

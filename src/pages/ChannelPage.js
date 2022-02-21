@@ -21,11 +21,12 @@ import FetchingComponent from '../components/Fetching.Component';
 
 
 
-const ChannelPage = ({ url }) => {
+const ChannelPage = (props) => {
 
     const dispatch = useDispatch();
     const webLogo = useSelector((state) => state.logoDetails.value);
     const netflixShows = useSelector((state) => state.netflixShows.value);
+
 
 
     const [search, setSearch] = useState('archive');
@@ -36,7 +37,7 @@ const ChannelPage = ({ url }) => {
     const [videoURL, setVideoURL] =
         useState([netflixTrailers, disneyTrailers, hboTrailers, primeTrailers, appleTrailers]);
 
-
+    const [channelName, setChannelName] = useState();
 
 
 
@@ -49,7 +50,7 @@ const ChannelPage = ({ url }) => {
 
             .then((res) => res.text())
             .then((text) => text.length ? JSON.parse(text) : {})
-            .then(data => { console.log(data); setShow(data) }) //api data will be visible in your browser console. 
+            .then(data => { setShow(data) }) //api data will be visible in your browser console. 
 
             .catch(err => console.warn("ERROR", err));
 
@@ -70,6 +71,7 @@ const ChannelPage = ({ url }) => {
 
 
     useEffect(() => {
+
 
 
         // getSeries(showState);
@@ -127,14 +129,8 @@ const ChannelPage = ({ url }) => {
 
                 <HomeWrapper>
 
-                    <FetchingComponent />
-                    {/* {
-                        netflixShows > 0 ? netflixShows.map(item =>
+                    <FetchingComponent channelName={channelName} />
 
-
-                            <WebCard key={item.id} showName={item.name} img={item.image} />
-                        ) : <></>
-                    } */}
                     {/* {netflixShows.map(item =>
 
 

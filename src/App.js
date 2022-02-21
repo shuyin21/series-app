@@ -9,12 +9,15 @@ import Nav from './components/Nav'
 import Details from './pages/DetailsPage';
 import ChannelPage from './pages/ChannelPage';
 
-
+import { useSelector } from 'react-redux';
 
 
 
 
 function App() {
+  const channel = useSelector((state) => state.channelDetails.value);
+  console.log(channel);
+
   return (
     <Router>
       <Nav />
@@ -22,7 +25,7 @@ function App() {
         <Route path='/' exact element={<Homepage />} />
         <Route path='/details' exact element={<Details />} />
 
-        <Route path='/channel' exact element={<ChannelPage />} />
+        <Route path='/channel' exact element={<ChannelPage channelValue={channel} />} />
 
 
       </Routes>

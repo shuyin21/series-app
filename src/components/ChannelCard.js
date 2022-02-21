@@ -35,7 +35,7 @@ const ChannelCard = ({ image, linkTo, value, channel }) => {
 };
 
 const Container = styled.div`
-    /* padding:0 0 10px; */
+   
     width:50%;
     height:150px;
     
