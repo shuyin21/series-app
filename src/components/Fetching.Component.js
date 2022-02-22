@@ -4,6 +4,7 @@ import { getTvShow, netflixState } from './Fetching';
 import { netflixDetails } from '../features/netflixReducer';
 import WebCard from '../components/WebCard';
 import Spinner from './Spinner';
+import { channelDetails } from '../features/channel';
 
 const FetchingComponent = (props) => {
 
@@ -22,7 +23,7 @@ const FetchingComponent = (props) => {
         getWebSeries();
 
 
-    }, [channelName]);
+    }, []);
 
 
 
@@ -111,6 +112,7 @@ const FetchingComponent = (props) => {
     return (
         <>
             {
+
                 netflixShows.map(item =>
 
 

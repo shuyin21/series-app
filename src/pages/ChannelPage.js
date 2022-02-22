@@ -2,11 +2,11 @@ import React, { Suspense, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import MovieTrailer from '../components/MovieTrailer';
 import ShowCard from '../components/ShowCard';
-import Spinner from '../components/Spinner';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { findShow } from '../features/showFinder';
 import { showDetails } from '../features/showDetails';
-
+// import { getTvShow, netflixState } from '../components/Fetching';
 import { showLogo } from '../features/logoSelector';
 import ShowcaseBlock from '../components/ShowcaseBlock';
 import netflix from '../Images/netflix.png';
@@ -16,11 +16,14 @@ import prime from '../Images/prime.png';
 import apple from '../Images/apple.png';
 import { appleTrailers, disneyTrailers, hboTrailers, netflixTrailers, primeTrailers } from '../data/trailerData';
 import WebCard from '../components/WebCard';
-import { getTvShow, netflixState } from '../components/Fetching';
+
 import FetchingComponent from '../components/Fetching.Component';
+import { netflixDetails } from '../features/netflixReducer';
+import Spinner from '../components/Spinner';
 
 
 
+const netflixState = [];
 const ChannelPage = (props) => {
 
     const dispatch = useDispatch();
@@ -68,15 +71,20 @@ const ChannelPage = (props) => {
         dispatch(showDetails(false));
         setSearch('');
     }
-
+    const [, updateState] = React.useState();
+    const forceUpdate = React.useCallback(() => updateState({}), []);
+    const someMethod = () => {
+        // Force a render without state change...
+        forceUpdate();
+    }
 
     useEffect(() => {
-
-
+        someMethod();
+        console.log(channelName);
 
         // getSeries(showState);
         getSeries(search);
-
+        getWebSeries(props.channelValue);
 
 
     }, [])
@@ -95,67 +103,111 @@ const ChannelPage = (props) => {
         console.log(netflixShows);
     }
 
+    const getWebSeries = async (web) => {
+        const url = ' https://api.tvmaze.com/schedule/full';
+        const holder = [];
+
+        await fetch(url)
+            .then((res) => res.text())
+            .then((text) => text.length ? JSON.parse(text) : {})
+            .then(data => {
+                data.map(x => {
+                    holder.push({
+                        name: x._embedded.show.name, web: x._embedded.show.webChannel ? x._embedded.show.webChannel.name :
+                            'not exist', id: x._embedded.show.id
+                    })
+                });
+                const reducer = holder.reduce(function (newArr, item) {
+                    if (item.web === web) {
+                        newArr.push([item.id]);
+                    }
+                    return newArr;
+                }, []);
+                const uni = uniqueArray1(reducer);
+                console.log(uni);
+                uni.map(x => getTvShow(x));
+                console.log(netflixState);
+                setTimeout(() => { dispatch(netflixDetails(netflixState)); }, 2000);
+            })
+            .catch(err => console.warn("ERROR", err));
+    }
+
+    function uniqueArray1(ar) {
+
+        var j = {};
+        ar.forEach(function (v) {
+            j[v + '::' + typeof v] = v;
+        });
+
+        return Object.keys(j).map(function (v) {
+            return j[v];
+        });
+
+    }
 
 
 
+    const getTvShow = async (query) => {
+        const url = `https://api.tvmaze.com/shows/${query}`
+        await fetch(url)
 
 
+            .then((res) => res.text())
+            .then((text) => text.length ? JSON.parse(text) : {})
+            .then(data => { netflixState.push(data) }) //api data will be visible in your browser console. 
+
+            .catch(err => console.warn("ERROR", err));
+
+    };
+
+
+    if (netflixShows < 1) {
+        return <Spinner />
+    }
 
     return (
-        <Suspense fallback={<Spinner />}>
 
-            <Main>
-                <MovieTrailer url={[videoURL[webLogo][0].src, videoURL[webLogo][1].src, videoURL[webLogo][2].src, videoURL[webLogo][3].src]} />
-                <LogoWrapper>
-                    <Logo src={imgSrc[webLogo]} />
-                </LogoWrapper>
+        <Main>
+            <MovieTrailer url={[videoURL[webLogo][0].src, videoURL[webLogo][1].src, videoURL[webLogo][2].src, videoURL[webLogo][3].src]} />
+            <LogoWrapper>
+                <Logo src={imgSrc[webLogo]} />
+            </LogoWrapper>
 
-                <Wrapper>
+            <Wrapper>
 
-                    <Form onSubmit={handleSearch}>
-                        <input type='search' value={search}
-                            placeholder='search for the show'
-                            required
-                            onChange={handleShowSearch}
-                        />
-                    </Form>
-
+                <Form onSubmit={handleSearch}>
+                    <input type='search' value={search}
+                        placeholder='search for the show'
+                        required
+                        onChange={handleShowSearch}
+                    />
+                </Form>
 
 
-                    <button onClick={reduxValue}>show redux</button>
 
-                    {/* <button onClick={unique(netflixHolder)}>netflix</button> */}
-                </Wrapper>
+                <button onClick={reduxValue}>show redux</button>
 
-                <HomeWrapper>
 
-                    <FetchingComponent channelName={channelName} />
+            </Wrapper>
 
-                    {/* {netflixShows.map(item =>
+            <HomeWrapper>
+                <h1>{props.channelValue}</h1>
+                {
+
+                    netflixShows.map(item =>
 
 
                         <WebCard key={item.id} showName={item.name} img={item.image} />
-                    )}
-                    {show.map(series => (
-
-
-                        <WebCard key={series.show.id} showName={series.show.name} img={series.show.image} />
-                    ))} */}
-                    {/* {
-                    webData.map((data) => (
-                        data._embedded.show.webChannel ? <h3 key={data.id}>{data._embedded.show.webChannel}</h3> : <></>
-
                     )
+                }
 
-                    )
-                } */}
-                </HomeWrapper>
-            </Main>
-
+            </HomeWrapper>
+        </Main>
 
 
 
-        </Suspense>
+
+
 
     );
 };
