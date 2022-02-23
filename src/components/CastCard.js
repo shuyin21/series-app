@@ -15,6 +15,8 @@ const CastCard = ({ actor }) => {
 
             <NameWrapper><Character>{actor.character.name}</Character></NameWrapper>
 
+
+
         </CastWrapper>
     );
 };
